@@ -1,11 +1,7 @@
 import { LoginForm } from "@/features/auth";
 import i18nServer from "@/i18n/i18n.server";
-import { HeadersFunction, LoaderFunctionArgs } from "@remix-run/node";
+import { LoaderFunctionArgs } from "@remix-run/node";
 import { data, useLoaderData } from "@remix-run/react";
-
-export const headers: HeadersFunction = () => ({
-  "Cache-Control": "max-age=86400, s-maxage=86400",
-});
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const t = await i18nServer.getFixedT(request, "auth");
@@ -21,11 +17,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     password: t("password"),
     signupTab: t("signupTab"),
   };
-  return data(translations, {
-    headers: {
-      "Cache-Control": "max-age=86400, s-maxage=86400",
-    },
-  });
+  return data(translations);
 };
 
 export default function Login() {
