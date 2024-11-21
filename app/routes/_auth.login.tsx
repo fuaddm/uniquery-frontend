@@ -1,3 +1,4 @@
+import { IntroMotion } from "@/components";
 import { LoginForm } from "@/features/auth";
 import i18nServer from "@/i18n/i18n.server";
 import { LoaderFunctionArgs } from "@remix-run/node";
@@ -23,5 +24,9 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 export default function Login() {
   const t = useLoaderData<typeof loader>();
 
-  return <LoginForm t={t} />;
+  return (
+    <IntroMotion>
+      <LoginForm t={t} />
+    </IntroMotion>
+  );
 }

@@ -1,4 +1,3 @@
-import { cn } from "@/lib/utils";
 import { useFetcher } from "@remix-run/react";
 import { FC, useEffect } from "react";
 import { theme } from "../types";

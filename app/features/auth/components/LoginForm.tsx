@@ -2,7 +2,6 @@ import { FC } from "react";
 import { Button, Checkbox, Input } from "@/components";
 import { Form, Link } from "@remix-run/react";
 import { SvgGoogle } from "../icons/SvgGoogle";
-import { Tab } from "./Tab";
 
 type LoginFormProps = {
   t: {
@@ -13,14 +12,6 @@ type LoginFormProps = {
 const LoginForm: FC<LoginFormProps> = ({ t }) => {
   return (
     <div className="w-full max-w-[360px]">
-      <div className="mb-6 flex flex-col gap-3 text-center">
-        <div className="text-3xl font-semibold text-text-primary">{t.title}</div>
-        <div className="text-base font-normal text-text-tertiary">{t.subtitle}</div>
-      </div>
-      <Tab
-        className="mb-8"
-        active="login"
-      />
       <Form>
         <Input
           label="Email"

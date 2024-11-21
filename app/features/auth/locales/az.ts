@@ -12,7 +12,7 @@ export const azAuth = {
   signupTab: "Qeydiyyatdan keç",
   emailPlaceholder: "E-poçt ünvanınızı daxil edin",
   password: "Şifrə",
-  signUp: {
+  signup: {
     title: "Hesab yaradın",
     subtitle: "30 günlük pulsuz sınağa başlayın.",
     passwordHint1: "Şifrə ən azı 8 simvoldan ibarət olmalıdır",

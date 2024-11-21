@@ -2,22 +2,17 @@ import { Button, Input } from "@/components";
 import { Form, Link } from "@remix-run/react";
 import { FC } from "react";
 import { SvgGoogle } from "../icons/SvgGoogle";
-import { Tab } from "./Tab";
 import { SvgCheck } from "../icons/SvgCheck";
-import { Heading } from "./Heading";
 
 type SignupFormProps = {
-  t: any;
+  t: {
+    [key: string]: string;
+  };
 };
 
 const SignupForm: FC<SignupFormProps> = ({ t }) => {
   return (
     <div className="w-full max-w-[360px]">
-      <Heading
-        title={t.title}
-        subtitle={t.subtitle}
-        active="signup"
-      />
       <Form>
         <Input
           label="Email"

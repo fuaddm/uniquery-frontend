@@ -12,7 +12,7 @@ export const enAuth = {
   signupTab: "Sign up",
   emailPlaceholder: "Enter your email",
   password: "Password",
-  signUp: {
+  signup: {
     title: "Create an account",
     subtitle: "Start your 30-day free trial.",
     passwordHint1: "Must be at least 8 characters",
