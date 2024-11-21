@@ -18,8 +18,8 @@ const IntroMotion: FC<IntroMotionProps> = ({ children }) => {
         transition: {
           default: {
             type: "spring",
-            stiffness: 100,
-            damping: 10,
+            stiffness: 300,
+            damping: 24,
           },
           opacity: { ease: "linear", duration: 0.2 },
         },

@@ -20,7 +20,7 @@ export default function Auth() {
   const { t, page } = useLoaderData<typeof loader>();
 
   return (
-    <div className="container grid min-h-screen place-items-center bg-bg-primary">
+    <div className="container flex min-h-screen justify-center bg-bg-primary pt-24">
       <div className="w-full max-w-[360px]">
         <Heading
           signupTab={t.signupTab}
