@@ -1,0 +1,26 @@
+export const azAuth = {
+  login: {
+    title: "Hesabınıza daxil olun",
+    subtitle: "Yenidən xoş gəlmisiniz! Zəhmət olmasa məlumatlarınızı daxil edin.",
+    remember: "30 gün yadda saxla",
+    forgotPassword: "Şifrəni unutmusunuz",
+    signInButton: "Daxil ol",
+    signInGoogle: "Google ilə daxil olun",
+    dontHaveAccount: "Hesabınız yoxdur?",
+  },
+  loginTab: "Daxil ol",
+  signupTab: "Qeydiyyatdan keç",
+  emailPlaceholder: "E-poçt ünvanınızı daxil edin",
+  password: "Şifrə",
+  signUp: {
+    title: "Hesab yaradın",
+    subtitle: "30 günlük pulsuz sınağa başlayın.",
+    passwordHint1: "Şifrə ən azı 8 simvoldan ibarət olmalıdır",
+    passwordHint2: "Ən azı bir böyük hərf olmalıdır",
+    passwordHint3: "Ən azı bir kiçik hərf olmalıdır",
+    passwordHint4: "Ən azı bir rəqəm olmalıdır",
+    signUpButton: "Başlayın",
+    signUpGoogle: "Google ilə qeydiyyatdan keçin",
+    haveAccount: "Artıq hesabınız var?",
+  },
+};

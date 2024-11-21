@@ -1,0 +1,8 @@
+.sk:enabled::after {
+  content: "";
+  position: absolute;
+  inset: 0px;
+  border-radius: inherit;
+  border-width: 2px;
+  mask-border: linear-gradient(to bottom, rgba(255, 255, 255, 0.12), transparent);
+}

@@ -1,0 +1,26 @@
+export const enAuth = {
+  login: {
+    title: "Log in to your account",
+    subtitle: "Welcome back! Please enter your details.",
+    remember: "Remember for 30 days",
+    forgotPassword: "Forgot password",
+    signInButton: "Sign in",
+    signInGoogle: "Sign in with Google",
+    dontHaveAccount: "Don’t have an account?",
+  },
+  loginTab: "Log in",
+  signupTab: "Sign up",
+  emailPlaceholder: "Enter your email",
+  password: "Password",
+  signUp: {
+    title: "Create an account",
+    subtitle: "Start your 30-day free trial.",
+    passwordHint1: "Must be at least 8 characters",
+    passwordHint2: "Must contain at least one uppercase letter",
+    passwordHint3: "Must contain at least one lowercase letter",
+    passwordHint4: "Must contain at least one number",
+    signUpButton: "Get started",
+    signUpGoogle: "Sign up with Google",
+    haveAccount: "Already have an account?",
+  },
+};
