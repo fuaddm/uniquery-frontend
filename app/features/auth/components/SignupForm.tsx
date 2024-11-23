@@ -1,4 +1,4 @@
-import { Button, Input } from "@/components";
+import { Button, Input } from "@/common";
 import { Form, Link } from "@remix-run/react";
 import { FC } from "react";
 import { SvgGoogle } from "../icons/SvgGoogle";

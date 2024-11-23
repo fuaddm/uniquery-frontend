@@ -1,5 +1,5 @@
 import { prefs } from "@/.server/cookies";
-import { theme } from "@/components";
+import { theme } from "@/common";
 import { ActionFunctionArgs } from "@remix-run/node";
 import { redirect } from "@remix-run/react";
 

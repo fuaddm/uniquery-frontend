@@ -4,8 +4,9 @@ import { Input } from "./ui/input";
 import { Checkbox } from "./ui/checkbox";
 import { SvgProps } from "./types";
 import { IntroMotion } from "./shared/IntroMotion";
+import { LanguageSelect } from "./shared/LanguageSelect";
 
-import type { theme } from "./types";
+import type { theme, langs } from "./types";
 
-export { ThemeSwitcher, Button, Input, Checkbox, IntroMotion };
+export { ThemeSwitcher, Button, Input, Checkbox, IntroMotion, LanguageSelect, langs };
 export type { theme, SvgProps };

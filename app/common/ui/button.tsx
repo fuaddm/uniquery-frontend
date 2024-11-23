@@ -81,6 +81,7 @@ export const button = tv({
         "enabled:focus:outline enabled:focus:outline-2 enabled:focus:outline-offset-2 enabled:focus:outline-focus-ring-error": true,
         "disabled:text-fg-disabled": true,
       }),
+      none: "",
     },
     size: {
       sm: "gap-2 rounded-lg px-3 py-2 text-sm font-semibold",
@@ -88,6 +89,7 @@ export const button = tv({
       lg: "gap-1.5 rounded-lg px-4 py-2.5 text-base font-semibold",
       xl: "gap-1.5 rounded-lg px-[18px] py-3 text-base font-semibold",
       "2xl": "gap-2 rounded-[10px] px-[22px] py-4 text-lg font-semibold",
+      none: "",
     },
     icon: {
       true: "block",
@@ -133,7 +135,7 @@ export const button = tv({
   },
 });
 
-const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button({ className = "", icon, variant, size, leftIcon, rightIcon, children, ...props }, ref) {
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button({ className = "", icon, variant, size, children, ...props }, ref) {
   return (
     <AriaButton
       className={cn({
@@ -143,9 +145,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button({ clas
       ref={ref}
       {...props}
     >
-      {leftIcon}
       {children}
-      {rightIcon}
     </AriaButton>
   );
 });

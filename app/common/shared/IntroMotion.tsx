@@ -8,6 +8,7 @@ type IntroMotionProps = {
 const IntroMotion: FC<IntroMotionProps> = ({ children }) => {
   return (
     <motion.div
+      key="modal"
       initial={{
         opacity: 0,
         transform: "translateY(40px)",
@@ -25,7 +26,7 @@ const IntroMotion: FC<IntroMotionProps> = ({ children }) => {
         },
       }}
     >
-      {children}
+      <div>{children}</div>
     </motion.div>
   );
 };

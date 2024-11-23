@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Button, Checkbox, Input } from "@/components";
+import { Button, Input } from "@/common";
 import { Form, Link } from "@remix-run/react";
 import { SvgGoogle } from "../icons/SvgGoogle";
 
@@ -26,11 +26,7 @@ const LoginForm: FC<LoginFormProps> = ({ t }) => {
           placeholder="&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;"
           wrapperClassName="mb-6"
         />
-        <div className="mb-6 flex items-center justify-between">
-          <Checkbox
-            sizeV="sm"
-            label={t.remember}
-          />
+        <div className="mb-6 flex items-center justify-end">
           <Button
             variant="linkColor"
             render={<Link to="/" />}

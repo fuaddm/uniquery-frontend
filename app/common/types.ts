@@ -12,8 +12,6 @@ export type ButtonProps = AriaButtonProps &
   ButtonHTMLAttributes<HTMLButtonElement> &
   ButtonVariants & {
     children?: ReactNode;
-    leftIcon?: ReactNode;
-    rightIcon?: ReactNode;
   };
 
 type InputVariants = VariantProps<typeof input>;
@@ -38,3 +36,5 @@ export type CheckboxProps = AriaCheckboxProps &
   };
 
 export type SvgProps = FC<SVGProps<SVGSVGElement>>;
+
+export type langs = "en" | "az";

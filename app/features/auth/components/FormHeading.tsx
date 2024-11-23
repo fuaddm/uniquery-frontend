@@ -1,23 +1,26 @@
 import { FC } from "react";
 import { Tab } from "./Tab";
 import logo from "@/assets/logo.svg";
+import { Link } from "@remix-run/react";
 
-type HeadingProps = {
+type FormHeadingProps = {
   title: string;
   subtitle: string;
   loginTab: string;
   signupTab: string;
-  active: "signup" | "login";
+  active: "signup" | "login" | null;
 };
 
-const Heading: FC<HeadingProps> = ({ title, subtitle, active, loginTab, signupTab }) => {
+const FormHeading: FC<FormHeadingProps> = ({ title, subtitle, active, loginTab, signupTab }) => {
   return (
     <div className="mb-8">
       <div className="mb-8 flex justify-center">
-        <img
-          src={logo}
-          alt="UniQuery Logo"
-        />
+        <Link to="/">
+          <img
+            src={logo}
+            alt="UniQuery Logo"
+          />
+        </Link>
       </div>
       <div className="mb-6 flex flex-col gap-3 text-center">
         <div className="text-3xl font-semibold text-text-primary">{title}</div>
@@ -32,4 +35,4 @@ const Heading: FC<HeadingProps> = ({ title, subtitle, active, loginTab, signupTa
   );
 };
 
-export { Heading };
+export { FormHeading };

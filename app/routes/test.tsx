@@ -1,4 +1,4 @@
-import { Button, Checkbox, Input } from "@/components";
+import { Button, Checkbox, Input } from "@/common";
 
 export default function Test() {
   return (

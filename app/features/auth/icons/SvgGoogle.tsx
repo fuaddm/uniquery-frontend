@@ -1,4 +1,4 @@
-import { SvgProps } from "@/components";
+import { SvgProps } from "@/common";
 
 const SvgGoogle: SvgProps = (props) => {
   return (
