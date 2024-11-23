@@ -1,5 +1,5 @@
 import { FC, ReactNode } from "react";
-import { motion } from "motion/react";
+import { motion, MotionConfig } from "motion/react";
 
 type IntroMotionProps = {
   children: ReactNode;
@@ -7,27 +7,29 @@ type IntroMotionProps = {
 
 const IntroMotion: FC<IntroMotionProps> = ({ children }) => {
   return (
-    <motion.div
-      key="modal"
-      initial={{
-        opacity: 0,
-        transform: "translateY(40px)",
-      }}
-      animate={{
-        opacity: 1,
-        transform: "translateY(0px)",
-        transition: {
-          default: {
-            type: "spring",
-            stiffness: 300,
-            damping: 24,
+    <MotionConfig reducedMotion="user">
+      <motion.div
+        key="modal"
+        initial={{
+          opacity: 0,
+          transform: "translateY(40px) scale(0.9)",
+        }}
+        animate={{
+          opacity: 1,
+          transform: "translateY(0px) scale(1)",
+          transition: {
+            default: {
+              type: "spring",
+              stiffness: 700,
+              damping: 30,
+            },
+            opacity: { ease: "linear", duration: 0.3 },
           },
-          opacity: { ease: "linear", duration: 0.2 },
-        },
-      }}
-    >
-      <div>{children}</div>
-    </motion.div>
+        }}
+      >
+        <div>{children}</div>
+      </motion.div>
+    </MotionConfig>
   );
 };
 

@@ -59,7 +59,7 @@ const SignupForm: FC<SignupFormProps> = ({ t }) => {
           <span className="text-sm font-normal text-text-tertiary">{t.haveAccount}</span>
           <Button
             variant="linkColor"
-            render={<Link to="/login" />}
+            render={<Link to="/auth?page=login" />}
           >
             {t.loginTab}
           </Button>
