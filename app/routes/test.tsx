@@ -1,23 +1,25 @@
-import { Button, Checkbox, Input } from "@/common";
+import { Button, Checkbox, Input, LanguageSelect, ThemeSwitcher } from "@/common";
 
 export default function Test() {
   return (
     <>
-      <div className="flex min-h-screen flex-col gap-3">
+      <div className="flex min-h-screen flex-col gap-3 p-10">
+        <div className="relative z-10">
+          <ThemeSwitcher />
+        </div>
+        <LanguageSelect />
         <Checkbox
           label="Remember me"
+          isIndeterminate
           hint="Save my login details for next time."
         />
-        <Checkbox indeterminate={true} />
+        <Checkbox />
+        <Checkbox isDisabled />
         <Checkbox
-          disabled={true}
-          indeterminate={true}
+          isDisabled
+          isSelected
         />
-        <Checkbox disabled={true} />
-        <Checkbox
-          sizeV="md"
-          indeterminate={true}
-        />
+        <Checkbox sizeV="md" />
         <Checkbox sizeV="md" />
         <div className="max-w-[300px]">
           <Input
@@ -37,7 +39,7 @@ export default function Test() {
         <Button size="lg">Button</Button>
         <Button
           size="2xl"
-          disabled={true}
+          isDisabled
         >
           Button
         </Button>
@@ -51,7 +53,7 @@ export default function Test() {
         <Button
           variant="secondary"
           size="2xl"
-          disabled={true}
+          isDisabled
         >
           Button
         </Button>
@@ -65,7 +67,7 @@ export default function Test() {
         <Button
           variant="secondaryColor"
           size="2xl"
-          disabled={true}
+          isDisabled
         >
           Button
         </Button>
@@ -79,7 +81,7 @@ export default function Test() {
         <Button
           variant="tertiary"
           size="2xl"
-          disabled={true}
+          isDisabled
         >
           Button
         </Button>
@@ -93,7 +95,7 @@ export default function Test() {
         <Button
           variant="tertiaryColor"
           size="2xl"
-          disabled={true}
+          isDisabled
         >
           Button
         </Button>
@@ -107,7 +109,7 @@ export default function Test() {
         <Button
           variant="link"
           size="2xl"
-          disabled={true}
+          isDisabled
         >
           Button
         </Button>
@@ -121,7 +123,7 @@ export default function Test() {
         <Button
           variant="linkColor"
           size="2xl"
-          disabled={true}
+          isDisabled
         >
           Button
         </Button>
@@ -135,7 +137,7 @@ export default function Test() {
         <Button
           variant="destructivePrimary"
           size="2xl"
-          disabled={true}
+          isDisabled
         >
           Button
         </Button>
@@ -149,7 +151,7 @@ export default function Test() {
         <Button
           variant="destructiveSecondary"
           size="2xl"
-          disabled={true}
+          isDisabled
         >
           Button
         </Button>
@@ -163,7 +165,7 @@ export default function Test() {
         <Button
           variant="destructiveTertiary"
           size="2xl"
-          disabled={true}
+          isDisabled
         >
           Button
         </Button>
@@ -178,7 +180,7 @@ export default function Test() {
         <Button
           variant="destructiveLink"
           size="2xl"
-          disabled={true}
+          isDisabled
         >
           Button
         </Button>

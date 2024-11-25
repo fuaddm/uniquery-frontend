@@ -1,121 +1,115 @@
 import { useFetcher } from "@remix-run/react";
-import { FC, FocusEvent, forwardRef, useRef, useState } from "react";
+import { FC } from "react";
 import { Button } from "../ui/button";
 import { SvgChevronDown } from "../icons/SvgChevronDown";
 import usFlag from "@assets/layout/US.svg";
 import azFlag from "@assets/layout/AZ.svg";
-import { ButtonProps } from "../types";
-import { cn } from "@/lib/utils";
-
-type LanguageSelectProps = {
-  defaultLanguage: "en" | "az";
-};
+import { useThemeAndLocale } from "../hooks/useThemeAndLocale";
+import { Key, ListBox, ListBoxItem, Popover, Select, SelectValue } from "react-aria-components";
+import { locale } from "../types";
 
 type Langs = "English" | "Azərbaycan";
 
-const LanguageSelect: FC<LanguageSelectProps> = ({ defaultLanguage }) => {
-  const defaultFullLang = defaultLanguage === "en" ? "English" : "Azərbaycan";
+const LanguageSelect: FC = () => {
+  const { locale } = useThemeAndLocale();
+
+  const mainFlag = locale === "en" ? usFlag : azFlag;
+  const getFullLocale = (shortLocale: locale): Langs => (locale === shortLocale ? "English" : "Azərbaycan");
+  const fullLocale = locale === "en" ? "English" : "Azərbaycan";
 
   const fetcher = useFetcher();
 
-  const [isOpen, setIsOpen] = useState(false);
-  const containerRef = useRef<HTMLDivElement | null>(null);
+  const options: { name: locale }[] = [
+    {
+      name: "az",
+    },
+    {
+      name: "en",
+    },
+  ];
 
-  function handleBlur(e: FocusEvent<HTMLDivElement>) {
-    if (!containerRef.current?.contains(e.relatedTarget)) {
-      setIsOpen(false);
-    }
+  function handleSubmit(selected: Key) {
+    const formData = new FormData();
+    formData.append("lng", String(selected));
+    fetcher.submit(formData, {
+      method: "POST",
+      action: "/api/locale-switch",
+    });
   }
 
-  function handleClose() {
-    setIsOpen(false);
-  }
   return (
     <fetcher.Form
       action="/api/locale-switch"
       method="POST"
     >
-      <div
-        className="relative z-0"
-        tabIndex={0}
-        ref={containerRef}
-        onBlur={handleBlur}
+      <Select
+        name="lng"
+        defaultSelectedKey={locale}
+        aria-label="Select language"
+        onSelectionChange={handleSubmit}
       >
-        <SelectLang
-          onClick={() => setIsOpen((isOpen) => !isOpen)}
-          lang={defaultFullLang}
-        />
-        <div
-          className={cn({
-            "invisible absolute right-0 top-[calc(100%_+_12px)] min-w-full rounded-lg border border-border-secondary bg-bg-primary py-1 shadow-lg": true,
-            visible: isOpen,
-          })}
+        <Button
+          variant="secondary"
+          size="md"
         >
-          <button
-            onClick={handleClose}
-            className={cn({
-              "group w-full px-1.5 py-0.5": true,
-              hidden: defaultFullLang === "Azərbaycan",
-            })}
-            type="submit"
-            name="lng"
-            value="Azərbaycan"
+          <SelectValue className="flex w-[140px] items-center">
+            <img
+              src={mainFlag}
+              height={20}
+              width={20}
+              alt={mainFlag + " flag"}
+              className="me-2"
+            />
+            <div>{fullLocale}</div>
+            <SvgChevronDown className="ms-auto max-h-5 min-h-5 min-w-5 max-w-5 stroke-button-secondary-fg" />
+          </SelectValue>
+        </Button>
+        <Popover className="w-[--trigger-width] rounded-lg border border-border-secondary bg-bg-primary p-1.5 shadow-lg">
+          <ListBox
+            className="outline-none"
+            items={options}
           >
-            <div className="flex min-w-max items-center gap-2 rounded-md p-2 group-hover:bg-bg-active">
-              <img
-                src={azFlag}
-                alt={azFlag + " flag"}
-              />
-              <div>Azərbaycan</div>
-            </div>
-          </button>
-          <button
-            onClick={handleClose}
-            className={cn({
-              "group w-full px-1.5 py-0.5": true,
-              hidden: defaultFullLang === "English",
+            {options.map((option) => {
+              if (option.name !== locale)
+                return (
+                  <ListBoxItem
+                    key={option.name}
+                    id={option.name}
+                    textValue={getFullLocale(option.name)}
+                    className="cursor-pointer outline-none hover:outline-none"
+                  >
+                    <SelectItem locale={option.name} />
+                  </ListBoxItem>
+                );
             })}
-            type="submit"
-            name="lng"
-            value="English"
-          >
-            <div className="flex min-w-max items-center gap-2 rounded-md p-2 group-hover:bg-bg-active">
-              <img
-                src={usFlag}
-                alt={usFlag + " flag"}
-              />
-              <div>English</div>
-            </div>
-          </button>
-        </div>
-      </div>
+          </ListBox>
+        </Popover>
+      </Select>
     </fetcher.Form>
   );
 };
 
-type SelectLangProps = ButtonProps & {
-  lang: Langs;
+type SelecItemProps = {
+  locale: locale;
 };
 
-const SelectLang = forwardRef<HTMLButtonElement, SelectLangProps>(function SelectLang({ lang, ...props }, ref) {
-  const mainFlag = lang === "English" ? usFlag : azFlag;
+const SelectItem: FC<SelecItemProps> = ({ locale }) => {
+  const mainFlag = locale === "en" ? usFlag : azFlag;
+  const fullLocale: Langs = locale === "en" ? "English" : "Azərbaycan";
 
   return (
-    <Button
-      ref={ref}
-      variant="secondary"
-      size="md"
-      className="flex w-[170px] items-center"
-      {...props}
-    >
-      <img
-        src={mainFlag}
-        alt={lang + " flag"}
-      />
-      <div className="">{lang}</div>
-      <SvgChevronDown className="ms-auto max-h-5 min-h-5 min-w-5 max-w-5 stroke-button-secondary-fg" />
-    </Button>
+    <div className="group">
+      <div className="flex min-w-max items-center gap-2 rounded-md p-2 md:group-hover:bg-bg-active">
+        <img
+          src={mainFlag}
+          height={20}
+          width={20}
+          alt={mainFlag + " flag"}
+        />
+        <div>{fullLocale}</div>
+      </div>
+    </div>
   );
-});
+};
 
 export { LanguageSelect };

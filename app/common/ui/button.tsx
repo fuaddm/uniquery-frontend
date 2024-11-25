@@ -3,7 +3,7 @@ import { ButtonProps } from "../types";
 import { tv } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 import styles from "./button.module.css";
-import { Button as AriaButton } from "@ariakit/react";
+import { Button as AriaButton } from "react-aria-components";
 
 export const button = tv({
   base: "relative z-0 flex w-fit items-center font-medium",
@@ -137,16 +137,18 @@ export const button = tv({
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button({ className = "", icon, variant, size, children, ...props }, ref) {
   return (
-    <AriaButton
-      className={cn({
-        [button({ variant, size, icon })]: true,
-        [className]: true,
-      })}
-      ref={ref}
-      {...props}
-    >
-      {children}
-    </AriaButton>
+    <>
+      <AriaButton
+        className={cn({
+          [button({ variant, size, icon })]: true,
+          [className]: true,
+        })}
+        ref={ref}
+        {...props}
+      >
+        {children}
+      </AriaButton>
+    </>
   );
 });
 

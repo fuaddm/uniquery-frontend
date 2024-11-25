@@ -4,6 +4,8 @@ import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
 import "@/styles/index.css";
 import { localeCookie } from "@/.server/cookies";
 import { getLang, getTheme } from "./common/index.server";
+import { useTranslation } from "react-i18next";
+import { useChangeLanguage } from "remix-i18next/react";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -18,8 +20,6 @@ export const links: LinksFunction = () => [
   },
 ];
 
-export const handle = { i18n: ["translation"] };
-
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const theme = await getTheme(request);
   const locale = await getLang(request);
@@ -29,11 +29,15 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const { theme, locale } = useLoaderData<typeof loader>();
+  const { i18n } = useTranslation();
+
+  useChangeLanguage(locale);
 
   return (
     <html
       lang={locale ?? "en"}
       className={theme}
+      dir={i18n.dir()}
     >
       <head>
         <meta charSet="utf-8" />

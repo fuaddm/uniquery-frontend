@@ -1,17 +1,17 @@
-import { VisuallyHidden, Checkbox as AriaCheckbox } from "@ariakit/react";
 import { forwardRef } from "react";
 import { tv } from "tailwind-variants";
 import { CheckboxProps } from "../types";
 import { cn } from "@/lib/utils";
 import { SvgCheck } from "../icons/SvgCheck";
 import { SvgMinus } from "../icons/SvgMinus";
+import { Checkbox as AriaCheckbox } from "react-aria-components";
 
 export const checkbox = tv({
   base: cn({
-    "flex items-center justify-center border border-border-primary bg-transparent has-[:enabled]:cursor-pointer": true,
-    "has-[:focus]:outline has-[:focus]:outline-2 has-[:focus]:outline-offset-2 has-[:focus]:outline-focus-ring": true,
-    "has-[:enabled:checked]:border-bg-brand-solid has-[:enabled:checked]:bg-bg-brand-solid": true,
-    "has-[:disabled]:border-border-disabled has-[:disabled]:bg-bg-disabled-subtle": true,
+    "flex cursor-pointer items-center justify-center border border-border-primary bg-transparent": true,
+    "group-data-[focused=true]:outline group-data-[focused=true]:outline-2 group-data-[focused=true]:outline-offset-2 group-data-[focused=true]:outline-focus-ring": true,
+    "group-data-[selected=true]:border-bg-brand-solid group-data-[selected=true]:bg-bg-brand-solid": true,
+    "group-data-[disabled=true]:cursor-default group-data-[disabled=true]:border-border-disabled group-data-[disabled=true]:bg-bg-disabled-subtle": true,
   }),
   variants: {
     sizeV: {
@@ -24,9 +24,11 @@ export const checkbox = tv({
   },
 });
 
-const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(function Checkbox({ sizeV, indeterminate, label, hint, ...props }, ref) {
+const Checkbox = forwardRef<HTMLLabelElement, CheckboxProps>(function Checkbox({ sizeV, label, hint, ...props }, ref) {
   return (
-    <label
+    <AriaCheckbox
+      {...props}
+      ref={ref}
       className={cn({
         group: true,
         "flex w-fit items-start": true,
@@ -36,34 +38,25 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(function Checkbox({
     >
       <span
         className={cn({
-          "mt-0.5": label !== undefined,
           [checkbox({ sizeV })]: true,
+          "mt-0.5": label !== undefined,
         })}
       >
-        {!indeterminate && (
-          <SvgCheck
-            className={cn({
-              "hidden stroke-fg-white group-has-[:checked]:block group-has-[:checked:disabled]:stroke-fg-disabled-subtle": true,
-              "h-3 max-h-3 min-h-3 w-3 min-w-3 max-w-3": sizeV === "sm" || sizeV === undefined,
-              "h-[14px] max-h-[14px] min-h-[14px] w-[14px] min-w-[14px] max-w-[14px]": sizeV === "md",
-            })}
-          />
-        )}
-        {indeterminate && (
-          <SvgMinus
-            className={cn({
-              "hidden stroke-fg-white group-has-[:checked]:block group-has-[:checked:disabled]:stroke-fg-disabled-subtle": true,
-              "h-3 max-h-3 min-h-3 w-3 min-w-3 max-w-3": sizeV === "sm" || sizeV === undefined,
-              "h-[14px] max-h-[14px] min-h-[14px] w-[14px] min-w-[14px] max-w-[14px]": sizeV === "md",
-            })}
-          />
-        )}
-        <VisuallyHidden>
-          <AriaCheckbox
-            {...props}
-            ref={ref}
-          />
-        </VisuallyHidden>
+        <SvgCheck
+          className={cn({
+            "hidden stroke-fg-white group-data-[selected=true]:block group-data-[selected=true]:group-data-[indeterminate=true]:hidden group-data-[disabled=true]:group-data-[selected=true]:stroke-fg-disabled-subtle":
+              true,
+            "h-3 max-h-3 min-h-3 w-3 min-w-3 max-w-3": sizeV === "sm" || sizeV === undefined,
+            "h-[14px] max-h-[14px] min-h-[14px] w-[14px] min-w-[14px] max-w-[14px]": sizeV === "md",
+          })}
+        />
+        <SvgMinus
+          className={cn({
+            "hidden stroke-fg-white group-data-[selected=true]:group-data-[indeterminate=true]:block group-data-[disabled=true]:group-data-[selected=true]:stroke-fg-disabled-subtle": true,
+            "h-3 max-h-3 min-h-3 w-3 min-w-3 max-w-3": sizeV === "sm" || sizeV === undefined,
+            "h-[14px] max-h-[14px] min-h-[14px] w-[14px] min-w-[14px] max-w-[14px]": sizeV === "md",
+          })}
+        />
       </span>
       {label !== undefined && (
         <div
@@ -94,7 +87,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(function Checkbox({
           )}
         </div>
       )}
-    </label>
+    </AriaCheckbox>
   );
 });
 

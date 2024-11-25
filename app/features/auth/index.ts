@@ -1,7 +1,8 @@
 import { azAuth } from "./locales/az";
 import { enAuth } from "./locales/en";
-import { LoginForm } from "./components/LoginForm";
-import { SignupForm } from "./components/SignupForm";
-import { AuthLayout } from "./components/AuthLayout";
+import { AuthPage } from "./pages/auth";
 
-export { enAuth, azAuth, LoginForm, SignupForm, AuthLayout };
+import type { pages } from "./types";
+
+export { enAuth, azAuth, AuthPage };
+export type { pages };

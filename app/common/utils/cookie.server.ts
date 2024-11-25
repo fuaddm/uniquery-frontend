@@ -1,5 +1,5 @@
 import { localeCookie, prefs } from "@/.server/cookies";
-import { langs, theme } from "../types";
+import { theme, locale } from "../types";
 import i18nServer from "@/i18n/i18n.server";
 import { redirect } from "@remix-run/react";
 
@@ -12,12 +12,12 @@ export async function getTheme(request: Request) {
 }
 
 export async function getLang(request: Request) {
-  const locale = (await i18nServer.getLocale(request)) as langs;
+  const locale = (await i18nServer.getLocale(request)) as locale;
   return locale;
 }
 
 export async function setLang(request: Request) {
-  const lng = (await request.formData()).get("lng") as langs;
+  const lng = (await request.formData()).get("lng") as locale;
 
   const referer = request.headers.get("Referer") || "/";
 

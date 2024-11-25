@@ -2,19 +2,21 @@ import { useFetcher } from "@remix-run/react";
 import { FC, useEffect } from "react";
 import { theme } from "../types";
 import { Button } from "../ui/button";
-import { cn } from "@/lib/utils";
+import { useThemeAndLocale } from "../hooks/useThemeAndLocale";
+import { Key, ListBox, ListBoxItem, Popover, Select, SelectValue } from "react-aria-components";
+import { SvgSun } from "../icons/SvgSun";
+import { SvgMoon } from "../icons/SvgMoon";
+import { SvgMonitor } from "../icons/SvgMonitor";
 
-type ThemeSwitcherProps = {
-  theme: theme;
-};
+const ThemeSwitcher: FC = () => {
+  const { theme } = useThemeAndLocale();
 
-const ThemeSwitcher: FC<ThemeSwitcherProps> = ({ theme }) => {
   const fetcher = useFetcher();
-  const sendingTheme = (fetcher.formData?.get("theme") as string | null) ?? "";
+  const sendingTheme = fetcher.formData?.get("theme") as theme;
 
   useEffect(() => {
     if (typeof document !== "undefined") {
-      if (sendingTheme !== "") {
+      if (fetcher.state === "loading") {
         document.documentElement.classList.remove("light");
         document.documentElement.classList.remove("dark");
         document.documentElement.classList.remove("system");
@@ -23,65 +25,83 @@ const ThemeSwitcher: FC<ThemeSwitcherProps> = ({ theme }) => {
     }
   }, [sendingTheme]);
 
-  function isActiveButton(themeProp: theme) {
-    if (sendingTheme === "") {
-      return theme === themeProp;
-    } else {
-      return sendingTheme === themeProp;
-    }
+  const options: { name: theme }[] = [
+    {
+      name: "light",
+    },
+    {
+      name: "dark",
+    },
+    {
+      name: "system",
+    },
+  ];
+
+  function handleSubmit(selected: Key) {
+    const formData = new FormData();
+    formData.append("theme", String(selected));
+    fetcher.submit(formData, {
+      method: "POST",
+      action: "/api/theme-switch",
+    });
   }
 
   return (
     <fetcher.Form
       action="/api/theme-switch"
       method="POST"
-      className="flex items-center rounded-full bg-bg-secondary p-1"
+      className="relative z-0 w-fit"
     >
-      <Button
-        className={cn({
-          "rounded-full px-4 py-2 text-text-secondary md:enabled:hover:bg-bg-brand-solid md:enabled:hover:text-text-secondary-on-brand": true,
-          "bg-bg-brand-solid-hover text-text-secondary-on-brand shadow-[0px_4px_14px_0px_rgba(105,65,98,0.4)]": isActiveButton("light"),
-        })}
-        variant="none"
-        size="none"
-        type="submit"
-        name="theme"
-        value="light"
-        disabled={isActiveButton("light")}
+      <Select
+        name="lng"
+        defaultSelectedKey={theme}
+        aria-label="Select language"
+        onSelectionChange={handleSubmit}
       >
-        Light
-      </Button>
-      <Button
-        className={cn({
-          "rounded-full px-4 py-2 text-text-secondary md:enabled:hover:bg-bg-brand-solid md:enabled:hover:text-text-secondary-on-brand": true,
-          "bg-bg-brand-solid-hover text-text-secondary-on-brand shadow-[0px_4px_14px_0px_rgba(105,65,98,0.4)]": isActiveButton("dark"),
-        })}
-        variant="none"
-        size="none"
-        type="submit"
-        name="theme"
-        value="dark"
-        disabled={isActiveButton("dark")}
-      >
-        Dark
-      </Button>
-      <Button
-        className={cn({
-          "rounded-full px-4 py-2 text-text-secondary md:enabled:hover:bg-bg-brand-solid md:enabled:hover:text-text-secondary-on-brand": true,
-          "bg-bg-brand-solid-hover text-text-secondary-on-brand shadow-[0px_4px_14px_0px_rgba(105,65,98,0.4)]": isActiveButton("system"),
-        })}
-        variant="none"
-        size="none"
-        type="submit"
-        name="theme"
-        value="system"
-        disabled={isActiveButton("system")}
-      >
-        System
-      </Button>
-
-      <div className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+        <Button
+          variant="secondary"
+          size="md"
+          icon={true}
+        >
+          <SelectValue>
+            {theme === "light" && <SvgSun className="h-5 w-5 stroke-fg-quinary" />}
+            {theme === "dark" && <SvgMoon className="h-5 w-5 stroke-fg-quinary" />}
+            {theme === "system" && <SvgMonitor className="h-5 w-5 stroke-fg-quinary" />}
+          </SelectValue>
+        </Button>
+        <Popover className="min-w-[--trigger-width] rounded-lg border border-border-secondary bg-bg-primary p-1.5 shadow-lg">
+          <ListBox
+            className="outline-none"
+            items={options}
+          >
+            {options.map((option) => {
+              return (
+                <ListBoxItem
+                  key={option.name}
+                  id={option.name}
+                  textValue={option.name}
+                  className="cursor-pointer outline-none hover:outline-none"
+                >
+                  <SelectItem theme={option.name} />
+                </ListBoxItem>
+              );
+            })}
+          </ListBox>
+        </Popover>
+      </Select>
     </fetcher.Form>
+  );
+};
+
+type SelecItemProps = {
+  theme: theme;
+};
+
+const SelectItem: FC<SelecItemProps> = ({ theme }) => {
+  return (
+    <div className="group w-full px-1.5 py-0.5">
+      <div className="flex min-w-max items-center gap-2 rounded-md px-6 py-1 font-semibold text-text-secondary group-hover:bg-bg-active">{theme[0].toUpperCase() + theme.slice(1)}</div>
+    </div>
   );
 };
 
