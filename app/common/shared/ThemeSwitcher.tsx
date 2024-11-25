@@ -100,7 +100,7 @@ type SelecItemProps = {
 const SelectItem: FC<SelecItemProps> = ({ theme }) => {
   return (
     <div className="group w-full px-1.5 py-0.5">
-      <div className="flex min-w-max items-center gap-2 rounded-md px-6 py-1 font-semibold text-text-secondary group-hover:bg-bg-active">{theme[0].toUpperCase() + theme.slice(1)}</div>
+      <div className="flex min-w-max items-center gap-2 rounded-md px-6 py-1 text-sm font-semibold text-text-secondary group-hover:bg-bg-active">{theme[0].toUpperCase() + theme.slice(1)}</div>
     </div>
   );
 };

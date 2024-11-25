@@ -60,7 +60,7 @@ const LanguageSelect: FC = () => {
               alt={mainFlag + " flag"}
               className="me-2"
             />
-            <div>{fullLocale}</div>
+            <div className="text-primary text-sm font-medium">{fullLocale}</div>
             <SvgChevronDown className="ms-auto max-h-5 min-h-5 min-w-5 max-w-5 stroke-button-secondary-fg" />
           </SelectValue>
         </Button>
@@ -106,7 +106,7 @@ const SelectItem: FC<SelecItemProps> = ({ locale }) => {
           width={20}
           alt={mainFlag + " flag"}
         />
-        <div>{fullLocale}</div>
+        <div className="text-primary text-sm font-medium">{fullLocale}</div>
       </div>
     </div>
   );
