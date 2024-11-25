@@ -1,7 +1,7 @@
 import { AuthPage } from "@/features/auth";
 
 export const headers = {
-  "Cache-Control": "max-age: 86400",
+  "Cache-Control": "max-age: 0, s-maxage:86400",
 };
 
 export const handle = { i18n: ["auth"] };
