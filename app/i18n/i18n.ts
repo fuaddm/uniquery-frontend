@@ -12,9 +12,9 @@ export const supportedLngs = ["az", "en"];
 export const fallbackLng = "en";
 
 // The default namespace of i18next is "translation", but you can customize it
-export const defaultNS = "auth";
+export const defaultNS = "common";
 
 export const resources = serverOnly$({
-  en: { auth: enTranslation.auth },
-  az: { auth: azTranslation.auth },
+  en: { common: "", auth: enTranslation.auth },
+  az: { common: "", auth: azTranslation.auth },
 });

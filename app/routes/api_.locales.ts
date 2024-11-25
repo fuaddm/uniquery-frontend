@@ -1,4 +1,4 @@
-import { type LoaderFunctionArgs } from "@remix-run/node";
+import { data, type LoaderFunctionArgs } from "@remix-run/node";
 import { z } from "zod";
 import { resources } from "@/i18n/i18n";
 
@@ -24,5 +24,5 @@ export async function loader({ request }: LoaderFunctionArgs) {
     })
     .parse(url.searchParams.get("ns"));
 
-  return Response.json(namespaces[ns]);
+  return data(namespaces[ns]);
 }
