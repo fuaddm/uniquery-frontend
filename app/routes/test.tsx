@@ -34,15 +34,31 @@ export default function Test() {
             sizeV="md"
           />
         </div>
-        <Button size="sm">Button</Button>
-        <Button size="md">Button</Button>
-        <Button size="lg">Button</Button>
-        <Button
-          size="2xl"
-          isDisabled
-        >
-          Button
-        </Button>
+        <div className="flex flex-col">
+          <Button size="sm">Button</Button>
+          <Button
+            size="sm"
+            isDisabled
+          >
+            Button
+          </Button>
+        </div>
+
+        <div className="flex flex-col">
+          <Button
+            size="sm"
+            variant="secondary"
+          >
+            Button
+          </Button>
+          <Button
+            size="sm"
+            isDisabled
+            variant="secondary"
+          >
+            Button
+          </Button>
+        </div>
 
         <Button
           variant="secondary"

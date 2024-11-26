@@ -16,7 +16,7 @@ const ThemeSwitcher: FC = () => {
 
   useEffect(() => {
     if (typeof document !== "undefined") {
-      if (fetcher.state === "loading") {
+      if (fetcher.state === "submitting" || fetcher.state === "loading") {
         document.documentElement.classList.remove("light");
         document.documentElement.classList.remove("dark");
         document.documentElement.classList.remove("system");
@@ -24,6 +24,13 @@ const ThemeSwitcher: FC = () => {
       }
     }
   }, [sendingTheme]);
+
+  function isActiveTheme(themeProp: theme) {
+    if (fetcher.state === "submitting" || fetcher.state === "loading") {
+      return sendingTheme === themeProp;
+    }
+    return theme === themeProp;
+  }
 
   const options: { name: theme }[] = [
     {
@@ -47,11 +54,7 @@ const ThemeSwitcher: FC = () => {
   }
 
   return (
-    <fetcher.Form
-      action="/api/theme-switch"
-      method="POST"
-      className="relative z-0 w-fit"
-    >
+    <fetcher.Form className="relative z-0 w-fit">
       <Select
         name="lng"
         defaultSelectedKey={theme}
@@ -64,9 +67,9 @@ const ThemeSwitcher: FC = () => {
           icon={true}
         >
           <SelectValue>
-            {theme === "light" && <SvgSun className="h-5 w-5 stroke-fg-quinary" />}
-            {theme === "dark" && <SvgMoon className="h-5 w-5 stroke-fg-quinary" />}
-            {theme === "system" && <SvgMonitor className="h-5 w-5 stroke-fg-quinary" />}
+            {isActiveTheme("light") && <SvgSun className="h-5 w-5 stroke-fg-quinary" />}
+            {isActiveTheme("dark") && <SvgMoon className="h-5 w-5 stroke-fg-quinary" />}
+            {isActiveTheme("system") && <SvgMonitor className="h-5 w-5 stroke-fg-quinary" />}
           </SelectValue>
         </Button>
         <Popover className="min-w-[--trigger-width] rounded-lg border border-border-secondary bg-bg-primary p-1.5 shadow-lg">
@@ -80,7 +83,7 @@ const ThemeSwitcher: FC = () => {
                   key={option.name}
                   id={option.name}
                   textValue={option.name}
-                  className="cursor-pointer outline-none hover:outline-none"
+                  className="pointer-events-auto cursor-pointer outline-none hover:outline-none"
                 >
                   <SelectItem theme={option.name} />
                 </ListBoxItem>
@@ -98,11 +101,7 @@ type SelecItemProps = {
 };
 
 const SelectItem: FC<SelecItemProps> = ({ theme }) => {
-  return (
-    <div className="group w-full px-1.5 py-0.5">
-      <div className="flex min-w-max items-center gap-2 rounded-md px-6 py-1 text-sm font-semibold text-text-secondary group-hover:bg-bg-active">{theme[0].toUpperCase() + theme.slice(1)}</div>
-    </div>
-  );
+  return <div className="flex w-full min-w-max items-center gap-2 rounded-md px-4 py-2 text-sm font-semibold text-text-secondary md:hover:bg-bg-active">{theme[0].toUpperCase() + theme.slice(1)}</div>;
 };
 
 export { ThemeSwitcher };

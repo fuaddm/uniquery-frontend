@@ -9,9 +9,11 @@ import { Checkbox as AriaCheckbox } from "react-aria-components";
 export const checkbox = tv({
   base: cn({
     "flex cursor-pointer items-center justify-center border border-border-primary bg-transparent": true,
-    "group-data-[focused=true]:outline group-data-[focused=true]:outline-2 group-data-[focused=true]:outline-offset-2 group-data-[focused=true]:outline-focus-ring": true,
+    "group-data-[focus-visible=true]:outline group-data-[focus-visible=true]:outline-2 group-data-[focus-visible=true]:outline-offset-2 group-data-[focus-visible=true]:outline-focus-ring": true,
     "group-data-[selected=true]:border-bg-brand-solid group-data-[selected=true]:bg-bg-brand-solid": true,
     "group-data-[disabled=true]:cursor-default group-data-[disabled=true]:border-border-disabled group-data-[disabled=true]:bg-bg-disabled-subtle": true,
+    "group-data-[selected=true]:group-data-[disabled=true]:cursor-default group-data-[selected=true]:group-data-[disabled=true]:border-border-disabled group-data-[selected=true]:group-data-[disabled=true]:bg-bg-disabled-subtle":
+      true,
   }),
   variants: {
     sizeV: {

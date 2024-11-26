@@ -10,23 +10,38 @@ import { locale } from "../types";
 
 type Langs = "English" | "Azərbaycan";
 
+const options: { name: locale }[] = [
+  {
+    name: "az",
+  },
+  {
+    name: "en",
+  },
+];
+
 const LanguageSelect: FC = () => {
+  const fetcher = useFetcher();
   const { locale } = useThemeAndLocale();
 
-  const mainFlag = locale === "en" ? usFlag : azFlag;
-  const getFullLocale = (shortLocale: locale): Langs => (locale === shortLocale ? "English" : "Azərbaycan");
-  const fullLocale = locale === "en" ? "English" : "Azərbaycan";
+  const sendingLocale = fetcher.formData?.get("lng") as locale;
 
-  const fetcher = useFetcher();
+  function isActiveLocale(localeProp: locale) {
+    if (fetcher.state === "submitting" || fetcher.state === "loading") {
+      return sendingLocale === localeProp;
+    }
+    return locale === localeProp;
+  }
 
-  const options: { name: locale }[] = [
-    {
-      name: "az",
-    },
-    {
-      name: "en",
-    },
-  ];
+  function getFullLocale(localeProp: locale) {
+    switch (localeProp) {
+      case "en":
+        return "English";
+      case "az":
+        return "Azərbaycan";
+      default:
+        return "English";
+    }
+  }
 
   function handleSubmit(selected: Key) {
     const formData = new FormData();
@@ -53,14 +68,30 @@ const LanguageSelect: FC = () => {
           size="md"
         >
           <SelectValue className="flex w-[140px] items-center">
-            <img
-              src={mainFlag}
-              height={20}
-              width={20}
-              alt={mainFlag + " flag"}
-              className="me-2"
-            />
-            <div className="text-primary text-sm font-medium">{fullLocale}</div>
+            {isActiveLocale("en") && (
+              <>
+                <img
+                  src={usFlag}
+                  height={20}
+                  width={20}
+                  alt={usFlag + " flag"}
+                  className="me-2"
+                />
+                <div className="text-primary text-sm font-medium">{getFullLocale("en")}</div>
+              </>
+            )}
+            {isActiveLocale("az") && (
+              <>
+                <img
+                  src={azFlag}
+                  height={20}
+                  width={20}
+                  alt={azFlag + " flag"}
+                  className="me-2"
+                />
+                <div className="text-primary text-sm font-medium">{getFullLocale("az")}</div>
+              </>
+            )}
             <SvgChevronDown className="ms-auto max-h-5 min-h-5 min-w-5 max-w-5 stroke-button-secondary-fg" />
           </SelectValue>
         </Button>
@@ -78,7 +109,10 @@ const LanguageSelect: FC = () => {
                     textValue={getFullLocale(option.name)}
                     className="cursor-pointer outline-none hover:outline-none"
                   >
-                    <SelectItem locale={option.name} />
+                    <SelectItem
+                      locale={option.name}
+                      fullLocale={getFullLocale(option.name)}
+                    />
                   </ListBoxItem>
                 );
             })}
@@ -91,23 +125,21 @@ const LanguageSelect: FC = () => {
 
 type SelecItemProps = {
   locale: locale;
+  fullLocale: Langs;
 };
 
-const SelectItem: FC<SelecItemProps> = ({ locale }) => {
+const SelectItem: FC<SelecItemProps> = ({ locale, fullLocale }) => {
   const mainFlag = locale === "en" ? usFlag : azFlag;
-  const fullLocale: Langs = locale === "en" ? "English" : "Azərbaycan";
 
   return (
-    <div className="group">
-      <div className="flex min-w-max items-center gap-2 rounded-md p-2 md:group-hover:bg-bg-active">
-        <img
-          src={mainFlag}
-          height={20}
-          width={20}
-          alt={mainFlag + " flag"}
-        />
-        <div className="text-primary text-sm font-medium">{fullLocale}</div>
-      </div>
+    <div className="flex min-w-max items-center gap-2 rounded-md p-2 md:hover:bg-bg-active">
+      <img
+        src={mainFlag}
+        height={20}
+        width={20}
+        alt={mainFlag + " flag"}
+      />
+      <div className="text-primary text-sm font-medium">{fullLocale}</div>
     </div>
   );
 };

@@ -1,7 +1,6 @@
 import { serverOnly$ } from "vite-env-only/macros";
 
-import enTranslation from "@/locales/en";
-import azTranslation from "@/locales/az";
+import { azAuth, enAuth } from "@/features/auth";
 
 // This is the list of languages your application supports, the last one is your
 // fallback language
@@ -12,9 +11,9 @@ export const supportedLngs = ["az", "en"];
 export const fallbackLng = "en";
 
 // The default namespace of i18next is "translation", but you can customize it
-export const defaultNS = "common";
+export const defaultNS = [];
 
 export const resources = serverOnly$({
-  en: { common: "", auth: enTranslation.auth },
-  az: { common: "", auth: azTranslation.auth },
+  en: { auth: enAuth },
+  az: { auth: azAuth },
 });
