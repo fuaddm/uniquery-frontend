@@ -10,6 +10,7 @@ export type ButtonProps = AriaButtonProps &
   ButtonVariants & {
     children?: ReactNode;
     className?: string;
+    asChild?: boolean;
   };
 
 type InputVariants = VariantProps<typeof input>;

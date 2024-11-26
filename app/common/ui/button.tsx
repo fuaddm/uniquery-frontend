@@ -1,4 +1,4 @@
-import { forwardRef } from "react";
+import { Children, cloneElement, forwardRef, JSXElementConstructor, ReactElement } from "react";
 import { ButtonProps } from "../types";
 import { tv } from "tailwind-variants";
 import { cn } from "@/lib/utils";
@@ -19,13 +19,13 @@ export const button = tv({
       }),
 
       secondary: cn({
-        "shadow-xs-secondary-skeuomorphic border border-button-secondary-border bg-button-secondary-bg text-button-secondary-fg": true,
+        "border border-button-secondary-border bg-button-secondary-bg text-button-secondary-fg shadow-xs-secondary-skeuomorphic": true,
         "data-[hovered=true]:border-button-secondary-border-hover data-[hovered=true]:bg-button-secondary-bg-hover data-[hovered=true]:text-button-secondary-fg-hover": true,
         "data-[focus-visible=true]:outline data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-offset-2 data-[focus-visible=true]:outline-focus-ring": true,
         "data-[disabled=true]:border-border-disabled-subtle data-[disabled=true]:bg-bg-primary data-[disabled=true]:text-fg-disabled data-[disabled=true]:shadow-xs": true,
       }),
       secondaryColor: cn({
-        "shadow-xs-secondary-skeuomorphic border border-button-secondary-color-border bg-button-secondary-color-bg text-button-secondary-color-fg": true,
+        "border border-button-secondary-color-border bg-button-secondary-color-bg text-button-secondary-color-fg shadow-xs-secondary-skeuomorphic": true,
         "data-[hovered=true]:border-button-secondary-color-border-hover data-[hovered=true]:bg-button-secondary-color-bg-hover data-[hovered=true]:text-button-secondary-color-fg-hover": true,
         "data-[focus-visible=true]:outline data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-offset-2 data-[focus-visible=true]:outline-focus-ring": true,
         "data-[disabled=true]:border-border-disabled-subtle data-[disabled=true]:bg-bg-primary data-[disabled=true]:text-fg-disabled data-[disabled=true]:shadow-xs": true,
@@ -66,7 +66,7 @@ export const button = tv({
           true,
       }),
       destructiveSecondary: cn({
-        "shadow-xs-secondary-skeuomorphic border border-button-secondary-error-border bg-button-secondary-error-bg text-button-secondary-error-fg": true,
+        "border border-button-secondary-error-border bg-button-secondary-error-bg text-button-secondary-error-fg shadow-xs-secondary-skeuomorphic": true,
         "data-[hovered=true]:border-button-secondary-error-border-hover data-[hovered=true]:bg-button-secondary-error-bg-hover data-[hovered=true]:text-button-secondary-error-fg-hover": true,
         "data-[focus-visible=true]:outline data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-offset-2 data-[focus-visible=true]:outline-focus-ring-error": true,
         "data-[disabled=true]:border-border-disabled-subtle data-[disabled=true]:bg-bg-primary data-[disabled=true]:text-fg-disabled data-[disabled=true]:shadow-xs": true,
@@ -137,20 +137,39 @@ export const button = tv({
   },
 });
 
-const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button({ className = "", icon, variant, size, children, ...props }, ref) {
-  return (
-    <>
-      <AriaButton
-        className={cn({
-          [button({ variant, size, icon })]: true,
-          [className]: true,
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button({ className = "", icon, variant, size, asChild, children, ...props }, ref) {
+  if (asChild) {
+    if (Children.count(children) !== 1) {
+      throw Error("Only one child can be inside button");
+    }
+
+    const child = Children.only(children) as ReactElement<any, string | JSXElementConstructor<any>>;
+
+    return (
+      <>
+        {cloneElement(child, {
+          className: cn({
+            [button({ variant, size, icon })]: true,
+            [className]: true,
+          }),
+          ref: ref,
+          ...props,
         })}
-        ref={ref}
-        {...props}
-      >
-        {children}
-      </AriaButton>
-    </>
+      </>
+    );
+  }
+
+  return (
+    <AriaButton
+      className={cn({
+        [button({ variant, size, icon })]: true,
+        [className]: true,
+      })}
+      ref={ref}
+      {...props}
+    >
+      {children}
+    </AriaButton>
   );
 });
 
