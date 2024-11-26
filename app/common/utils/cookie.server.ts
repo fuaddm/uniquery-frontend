@@ -15,15 +15,3 @@ export async function getLang(request: Request) {
   const locale = (await i18nServer.getLocale(request)) as locale;
   return locale;
 }
-
-export async function setLang(request: Request) {
-  const lng = (await request.formData()).get("lng") as locale;
-
-  const referer = request.headers.get("Referer") || "/";
-
-  return redirect(referer, {
-    headers: {
-      "Set-Cookie": await localeCookie.serialize(lng),
-    },
-  });
-}
