@@ -5,8 +5,9 @@ export const prefs = createCookie("prefs", {
 });
 
 export const localeCookie = createCookie("lng", {
-  path: "/",
-  sameSite: "lax",
-  secure: process.env.NODE_ENV === "production",
-  httpOnly: true,
+  maxAge: 31_536_000, // one year
+  // path: "/",
+  // sameSite: "lax",
+  // secure: process.env.NODE_ENV === "production",
+  // httpOnly: true,
 });

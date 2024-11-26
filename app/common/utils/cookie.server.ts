@@ -1,7 +1,6 @@
-import { localeCookie, prefs } from "@/.server/cookies";
+import { prefs } from "@/.server/cookies";
 import { theme, locale } from "../types";
 import i18nServer from "@/i18n/i18n.server";
-import { redirect } from "@remix-run/react";
 
 export async function getTheme(request: Request) {
   const cookie = request.headers.get("cookie");

@@ -1,3 +1,3 @@
-import { getTheme, getLang, setLang } from "./utils/cookie.server";
+import { getTheme, getLang } from "./utils/cookie.server";
 
-export { getTheme, getLang, setLang };
+export { getTheme, getLang };
