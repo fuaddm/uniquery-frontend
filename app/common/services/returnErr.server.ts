@@ -3,7 +3,6 @@ import { ServiceResp } from "../types";
 import { AxiosError } from "axios";
 
 export function returnErr(error: AxiosError): ServiceResp {
-  console.log(error.config);
   if (error.response) {
     // The request was made and the server responded with a status code
     // that falls out of the range of 2xx
