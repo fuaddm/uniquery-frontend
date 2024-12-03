@@ -23,4 +23,6 @@ export const azAuth = {
     signUpGoogle: "Google ilə qeydiyyatdan keçin",
     haveAccount: "Artıq hesabınız var?",
   },
+  invalid_email: "Oops! Email formatı səhvdir. Zəhmət olmasa, düzgün formatda daxil edin və yenidən cəhd edin.",
+  invalid_password: "Şifrə tələb olunur.",
 };

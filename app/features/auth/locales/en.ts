@@ -23,4 +23,6 @@ export const enAuth = {
     signUpGoogle: "Sign up with Google",
     haveAccount: "Already have an account?",
   },
+  invalid_email: "Oops! It looks like the email address is not valid. Please check and try again.",
+  invalid_password: "Password is required.",
 };

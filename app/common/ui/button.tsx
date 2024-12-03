@@ -143,7 +143,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button({ clas
       throw Error("Only one child can be inside button");
     }
 
-    const child = Children.only(children) as ReactElement<any, string | JSXElementConstructor<any>>;
+    const child = Children.only(children)! as ReactElement<any, string | JSXElementConstructor<any>>;
 
     return (
       <>

@@ -1,4 +1,4 @@
-import { Button, Checkbox, Input, LanguageSelect, ThemeSwitcher } from "@/common";
+import { Button, Checkbox, Input, LanguageSelect, RouteError, ThemeSwitcher } from "@/common";
 
 export default function Test() {
   return (
@@ -213,3 +213,5 @@ export default function Test() {
     </>
   );
 }
+
+export const ErrorBoundary = RouteError;

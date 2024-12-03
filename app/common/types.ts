@@ -37,3 +37,10 @@ export type SvgProps = FC<SVGProps<SVGSVGElement>>;
 export type locale = "en" | "az";
 
 export type theme = "dark" | "light" | "system";
+
+export type ServiceResp = {
+  status: number;
+  ok: boolean;
+  data: any;
+  key: string | null;
+};
