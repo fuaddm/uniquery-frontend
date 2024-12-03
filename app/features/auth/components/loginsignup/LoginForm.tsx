@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Button, Input } from "@/common";
-import { Link, useFetcher } from "@remix-run/react";
+import { Form, Link, useFetcher } from "@remix-run/react";
 import { useTranslation } from "react-i18next";
 import { SvgGoogle } from "../../icons/SvgGoogle";
 import { PasswordInput } from "../PasswordInput";
@@ -8,7 +8,6 @@ import * as z from "zod";
 import { LoginSchema } from "../../schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Form } from "react-aria-components";
 
 type LoginFormType = z.infer<typeof LoginSchema>;
 
