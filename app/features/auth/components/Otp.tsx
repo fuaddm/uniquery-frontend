@@ -25,10 +25,10 @@ const Otp: FC<OtpProps> = ({ hasError = false }) => {
         isInputNum={true}
         hasErrored={hasError}
         shouldAutoFocus={true}
-        containerStyle="flex w-full justify-center flex-wrap items-center gap-3"
+        containerStyle="flex w-full justify-center flex-wrap items-center gap-1.5 md:gap-3"
         inputStyle={cn({
-          "max-h-16 min-h-16 min-w-16 max-w-16 rounded-xl border-2 border-border-brand bg-bg-primary outline-none md:max-h-16 md:min-h-16 md:min-w-16 md:max-w-16": true,
-          "text-3xl text-text-brand-tertiary-alt": true,
+          "max-h-10 min-h-10 min-w-10 max-w-10 rounded-lg border-2 border-border-brand bg-bg-primary outline-none md:max-h-16 md:min-h-16 md:min-w-16 md:max-w-16 md:rounded-xl": true,
+          "text-base text-text-brand-tertiary-alt md:text-3xl": true,
         })}
         focusStyle={cn({
           "outline-solid outline-2 outline-offset-2 outline-border-brand": true,

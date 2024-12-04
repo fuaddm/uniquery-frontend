@@ -4,4 +4,5 @@ export const errorNames = {
   email_on_cooldown: "email_on_cooldown",
   otp_is_not_valid: "otp_is_not_valid",
   otp_request_too_soon: "otp_request_too_soon",
+  otp_attempts_exceeded: "otp_attempts_exceeded",
 };

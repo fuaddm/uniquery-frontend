@@ -4,6 +4,7 @@ import { ServiceResp } from "@/common";
 import { axiosInstance } from "@/.server/axiosInstance";
 import { apiPath, returnErr } from "@/common/index.server";
 import { accessTokenCookie, proceedKeyCookie, refreshTokenCookie } from "@/.server/cookies";
+import { errorNames } from "../../constants/errors";
 
 export async function otpAction(request: Request) {
   const headers = new Headers();
@@ -49,6 +50,15 @@ export async function otpAction(request: Request) {
         headers,
       });
     }
+
+    if (verifyResp.key === errorNames.otp_attempts_exceeded) {
+      throw redirect("/auth?page=signup", {
+        headers: {
+          "Set-Cookie": await proceedKeyCookie.serialize("", { maxAge: -1 }),
+        },
+      });
+    }
+
     return data(verifyResp);
   } else if (actionType === "resendOtp") {
     const resendResp = await axiosInstance
@@ -59,6 +69,14 @@ export async function otpAction(request: Request) {
         return { status: resp.status, ok: true, data: null, key: null };
       })
       .catch(returnErr);
+
+    if (resendResp.key === errorNames.otp_attempts_exceeded) {
+      throw redirect("/auth?page=signup", {
+        headers: {
+          "Set-Cookie": await proceedKeyCookie.serialize("", { maxAge: -1 }),
+        },
+      });
+    }
 
     return data(resendResp);
   }

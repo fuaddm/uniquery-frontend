@@ -16,10 +16,6 @@ type OtpPageProps = {
 const OtpPage: FC<OtpPageProps> = ({ email, actionData }) => {
   const { t } = useTranslation("auth");
 
-  if (actionData) {
-    console.log(actionData);
-  }
-
   const navigation = useNavigation();
 
   const isLoading = navigation.state !== "idle";
