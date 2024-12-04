@@ -1,4 +1,11 @@
 export const enAuth = {
+  errors: {
+    invalid_email_or_password: "The email or password you entered is incorrect. Please try again.",
+    email_already_registered: "The email you entered is already registered. Please use a different email or try to log in.",
+    email_on_cooldown: "There have been too many attempts to register with this email. Please try again later.",
+    otp_is_not_valid: "The OTP you entered is not valid. Please check and try again.",
+    otp_request_too_soon: "You requested an OTP too recently. Please wait before trying again.",
+  },
   login: {
     title: "Log in to your account",
     subtitle: "Welcome back! Please enter your details.",
@@ -25,4 +32,13 @@ export const enAuth = {
   },
   invalid_email: "Oops! It looks like the email address is not valid. Please check and try again.",
   invalid_password: "Password is required.",
+
+  otp: {
+    title: "Check your email",
+    subtitle: "We sent a verification code to",
+    submitButton: "Verify email",
+    dontRecieve: "Didn’t receive the email?",
+    resend: "Click to resend",
+    backToLogin: "Back to log in",
+  },
 };

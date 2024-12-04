@@ -15,3 +15,7 @@ export const accessTokenCookie = createCookie("AccessToken", {
 export const refreshTokenCookie = createCookie("RefreshToken", {
   maxAge: 86400 * 7, // 7 day
 });
+
+export const proceedKeyCookie = createCookie("ProceedKey", {
+  maxAge: 5 * 60, // 5 minute
+});

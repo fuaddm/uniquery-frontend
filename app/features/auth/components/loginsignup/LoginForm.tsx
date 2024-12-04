@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Button, Input } from "@/common";
+import { Button, Input, ServiceResp } from "@/common";
 import { Form, Link, useFetcher } from "@remix-run/react";
 import { useTranslation } from "react-i18next";
 import { SvgGoogle } from "../../icons/SvgGoogle";
@@ -8,11 +8,12 @@ import * as z from "zod";
 import { LoginSchema } from "../../schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { errorNames } from "../../constants/errors";
 
 type LoginFormType = z.infer<typeof LoginSchema>;
 
 const LoginForm: FC = () => {
-  const fetcher = useFetcher();
+  const fetcher = useFetcher<ServiceResp>();
   const { t } = useTranslation("auth");
 
   const {
@@ -32,6 +33,8 @@ const LoginForm: FC = () => {
     });
   };
 
+  const isLoading = fetcher.state !== "idle";
+
   return (
     <div className="w-full max-w-[360px]">
       <Form
@@ -47,6 +50,7 @@ const LoginForm: FC = () => {
           <Input
             label="Email"
             sizeV="md"
+            disabled={isLoading}
             invalid={errors.email !== undefined}
             placeholder={t("emailPlaceholder")}
             {...register("email")}
@@ -61,6 +65,7 @@ const LoginForm: FC = () => {
           <PasswordInput
             sizeV="md"
             type="password"
+            disabled={isLoading}
             invalid={errors.password !== undefined}
             label={t("password")}
             placeholder="&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;"
@@ -80,13 +85,20 @@ const LoginForm: FC = () => {
             <Link to="/">{t("login.forgotPassword")}?</Link>
           </Button>
         </div>
+        {fetcher.data?.key === errorNames.invalid_email_or_password && !isLoading && (
+          <>
+            <div className="mb-6 rounded-lg bg-bg-error-solid p-4 text-text-white">{t("errors.invalid_email_or_password")}</div>
+          </>
+        )}
         <Button
           type="submit"
+          isDisabled={isLoading}
           className="mb-4 w-full justify-center"
         >
           {t("login.signInButton")}
         </Button>
         <Button
+          isDisabled
           variant="secondary"
           className="mb-8 w-full justify-center"
         >

@@ -8,7 +8,7 @@ export function useAuthPage() {
 
   if (navigation.state === "loading" && navigation.location.pathname === "/auth") {
     const navigationParam = (new URLSearchParams(navigation.location?.search).get("page") || "login") as pages;
-    return navigationParam as "login" | "signup";
+    return navigationParam as "login" | "signup" | "otp";
   }
   return page;
 }

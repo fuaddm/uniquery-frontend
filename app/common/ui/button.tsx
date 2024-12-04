@@ -4,6 +4,7 @@ import { tv } from "tailwind-variants";
 import { cn } from "@/lib/utils";
 import styles from "./button.module.css";
 import { Button as AriaButton } from "react-aria-components";
+import { ILoading } from "../shared/Loading/ILoading";
 
 export const button = tv({
   base: "relative z-0 flex w-fit items-center font-medium data-[focused=true]:outline-none",
@@ -14,7 +15,7 @@ export const button = tv({
         "bg-button-primary-bg text-button-primary-fg shadow-xs-skeuomorphic": true,
         "data-[hovered=true]:bg-button-primary-bg-hover": true,
         "data-[focus-visible=true]:outline data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-offset-2 data-[focus-visible=true]:outline-focus-ring": true,
-        "data-[disabled=true]:border data-[disabled=true]:border-border-disabled-subtle data-[disabled=true]:bg-bg-disabled data-[disabled=true]:text-fg-disabled data-[disabled=true]:shadow-xs data-[disabled=true]:outline-none":
+        "data-[disabled=true]:bg-bg-disabled data-[disabled=true]:text-fg-disabled data-[disabled=true]:shadow-xs data-[disabled=true]:outline data-[disabled=true]:outline-1 data-[disabled=true]:outline-offset-0 data-[disabled=true]:outline-border-disabled-subtle":
           true,
       }),
 
@@ -137,7 +138,8 @@ export const button = tv({
   },
 });
 
-const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button({ className = "", icon, variant, size, asChild, children, ...props }, ref) {
+// TODO: isPending
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button({ className = "", icon, variant, size, asChild, isPending, children, ...props }, ref) {
   if (asChild) {
     if (Children.count(children) !== 1) {
       throw Error("Only one child can be inside button");

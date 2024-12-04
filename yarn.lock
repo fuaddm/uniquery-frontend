@@ -6506,6 +6506,11 @@ react@^18.2.0:
   dependencies:
     loose-envify "^1.1.0"
 
+reactjs-otp-input@^2.0.10:
+  version "2.0.10"
+  resolved "https://registry.yarnpkg.com/reactjs-otp-input/-/reactjs-otp-input-2.0.10.tgz#a288d7e86963c66f1e8151b5ca94dbeb621d4d9a"
+  integrity sha512-JNHvMs0AYNcXw2EmbfOgNVlLzPoX6i8UfsUSjhcFl7I0SdIPxxfiaNEUly4ys9TUgXgIElUxY+dqKRgrbKYT1w==
+
 read-cache@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/read-cache/-/read-cache-1.0.0.tgz#e664ef31161166c9751cdbe8dbcf86b5fb58f774"

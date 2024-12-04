@@ -1,7 +1,6 @@
 import { RouteError } from "@/common";
 import { AuthPage } from "@/features/auth";
-import { authAction } from "@/features/auth/index.server";
-import { authLoader } from "@/features/auth/services/remix/authLoader.server";
+import { authAction, authLoader } from "@/features/auth/index.server";
 import { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
 
 export const handle = { i18n: ["auth"] };

@@ -1,5 +1,5 @@
 import { Button, RouteError } from "@/common";
-import { appLoader } from "@/features/auth/services/remix/appLoader.server";
+import { appLoader } from "@/features/auth/index.server";
 import { LoaderFunctionArgs } from "@remix-run/node";
 import { Link, useFetcher } from "@remix-run/react";
 
@@ -38,7 +38,7 @@ export default function App() {
         >
           <Button
             type="submit"
-            variant="secondary"
+            variant="primary"
           >
             Logout
           </Button>

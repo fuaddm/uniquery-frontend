@@ -1,4 +1,11 @@
 export const azAuth = {
+  errors: {
+    invalid_email_or_password: "Daxil etdiyiniz e-poçt və ya şifrə yanlışdır. Zəhmət olmasa, yenidən cəhd edin.",
+    email_already_registered: "Daxil etdiyiniz e-poçt artıq qeydiyyatdan keçib. Zəhmət olmasa, fərqli bir e-poçt ünvanı istifadə edin və ya daxil olmağa cəhd edin.",
+    email_on_cooldown: "Bu e-poçt ilə çox sayda qeydiyyat cəhdi edilmişdir. Zəhmət olmasa, bir az sonra yenidən cəhd edin.",
+    otp_is_not_valid: "Daxil etdiyiniz OTP etibarlı deyil. Zəhmət olmasa yoxlayın və yenidən cəhd edin.",
+    otp_request_too_soon: "Siz çox tez OTP istəyi göndərmisiniz. Zəhmət olmasa bir az gözləyin və yenidən cəhd edin.",
+  },
   login: {
     title: "Hesabınıza daxil olun",
     subtitle: "Yenidən xoş gəlmisiniz! Zəhmət olmasa məlumatlarınızı daxil edin.",
@@ -25,4 +32,13 @@ export const azAuth = {
   },
   invalid_email: "Oops! Email formatı səhvdir. Zəhmət olmasa, düzgün formatda daxil edin və yenidən cəhd edin.",
   invalid_password: "Şifrə tələb olunur.",
+
+  otp: {
+    title: "E-poçtunuzu yoxlayın",
+    subtitle: "Təsdiq kodunu bu e-poçta göndərdik:",
+    submitButton: "E-poçtu təsdiq et",
+    dontRecieve: "E-poçt almadınız?",
+    resend: "Yenidən göndərmək üçün klikləyin",
+    backToLogin: "Girişə qayıt",
+  },
 };

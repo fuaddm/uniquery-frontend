@@ -9,3 +9,8 @@ export const LoginSchema = z.object({
   email: z.string().email(),
   password: z.string().min(1, { message: "min" }),
 });
+
+export const OtpSchema = z
+  .string()
+  .length(6)
+  .regex(/^\d{6}$/);

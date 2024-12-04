@@ -31,6 +31,7 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.53.2",
     "react-i18next": "^15.1.1",
+    "reactjs-otp-input": "^2.0.10",
     "remix-i18next": "^6.4.1",
     "sonner": "^1.7.0",
     "tailwind-merge": "^2.5.4",

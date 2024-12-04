@@ -1,4 +1,4 @@
-import { Button, Input } from "@/common";
+import { Button, Input, ServiceResp } from "@/common";
 import { Form, Link, useFetcher } from "@remix-run/react";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
@@ -11,12 +11,13 @@ import { cn } from "@/lib/utils";
 import { SvgClose } from "../../icons/SvgClose";
 import { PasswordInput } from "../PasswordInput";
 import { SignUpSchema } from "../../schemas";
+import { errorNames } from "../../constants/errors";
 
 type SignUpFormType = z.infer<typeof SignUpSchema>;
 
 const SignupForm: FC = () => {
   const { t } = useTranslation("auth");
-  const fetcher = useFetcher();
+  const fetcher = useFetcher<ServiceResp>();
 
   const {
     register,
@@ -66,6 +67,8 @@ const SignupForm: FC = () => {
     }
   });
 
+  const isLoading = fetcher.state !== "idle";
+
   return (
     <div className="w-full max-w-[360px]">
       <Form
@@ -81,6 +84,7 @@ const SignupForm: FC = () => {
           <Input
             label="Email"
             sizeV="md"
+            disabled={isLoading}
             invalid={errors.email !== undefined}
             placeholder={t("emailPlaceholder")}
             {...register("email")}
@@ -94,6 +98,7 @@ const SignupForm: FC = () => {
         <PasswordInput
           sizeV="md"
           type="password"
+          disabled={isLoading}
           invalid={errors.password !== undefined}
           label={t("password")}
           placeholder="&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;"
@@ -172,14 +177,26 @@ const SignupForm: FC = () => {
             </>
           )}
         </div>
+        {fetcher.data?.key === errorNames.email_already_registered && !isLoading && (
+          <>
+            <div className="mb-6 rounded-lg bg-bg-error-solid p-4 text-text-white">{t("errors.email_already_registered")}</div>
+          </>
+        )}
+        {fetcher.data?.key === errorNames.email_on_cooldown && !isLoading && (
+          <>
+            <div className="mb-6 rounded-lg bg-bg-error-solid p-4 text-text-white">{t("errors.email_on_cooldown")}</div>
+          </>
+        )}
         <Button
           type="submit"
+          isDisabled={isLoading}
           className="mb-4 w-full justify-center"
         >
           {t("signup.signUpButton")}
         </Button>
         <Button
           variant="secondary"
+          isDisabled
           className="mb-8 w-full justify-center"
         >
           <div className="flex items-center justify-center gap-3">

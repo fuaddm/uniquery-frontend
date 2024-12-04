@@ -1,12 +1,14 @@
 import { CSSProperties, FC } from "react";
 import styles from "./loading.module.css";
+import { cn } from "@/lib/utils";
 
 type ILoadingProps = {
   radius?: number;
+  boxClassnames?: string;
 };
 
-// TODO width height prop for line.
-const ILoading: FC<ILoadingProps> = ({ radius = 10 }) => {
+// TODO: width, height prop for line.
+const ILoading: FC<ILoadingProps> = ({ radius = 10, boxClassnames = "" }) => {
   const boxStyle: CSSProperties = {
     width: radius + "px",
     height: radius + "px",
@@ -25,52 +27,88 @@ const ILoading: FC<ILoadingProps> = ({ radius = 10 }) => {
     >
       <div
         style={boxStyle}
-        className={styles.box}
+        className={cn({
+          [styles.box]: true,
+          [boxClassnames]: true,
+        })}
       ></div>
       <div
         style={boxStyle}
-        className={styles.box}
+        className={cn({
+          [styles.box]: true,
+          [boxClassnames]: true,
+        })}
       ></div>
       <div
         style={boxStyle}
-        className={styles.box}
+        className={cn({
+          [styles.box]: true,
+          [boxClassnames]: true,
+        })}
       ></div>
       <div
         style={boxStyle}
-        className={styles.box}
+        className={cn({
+          [styles.box]: true,
+          [boxClassnames]: true,
+        })}
       ></div>
       <div
         style={boxStyle}
-        className={styles.box}
+        className={cn({
+          [styles.box]: true,
+          [boxClassnames]: true,
+        })}
       ></div>
       <div
         style={boxStyle}
-        className={styles.box}
+        className={cn({
+          [styles.box]: true,
+          [boxClassnames]: true,
+        })}
       ></div>
 
       <div
         style={boxStyle}
-        className={styles.box}
+        className={cn({
+          [styles.box]: true,
+          [boxClassnames]: true,
+        })}
       ></div>
       <div
         style={boxStyle}
-        className={styles.box}
+        className={cn({
+          [styles.box]: true,
+          [boxClassnames]: true,
+        })}
       ></div>
       <div
         style={boxStyle}
-        className={styles.box}
+        className={cn({
+          [styles.box]: true,
+          [boxClassnames]: true,
+        })}
       ></div>
       <div
         style={boxStyle}
-        className={styles.box}
+        className={cn({
+          [styles.box]: true,
+          [boxClassnames]: true,
+        })}
       ></div>
       <div
         style={boxStyle}
-        className={styles.box}
+        className={cn({
+          [styles.box]: true,
+          [boxClassnames]: true,
+        })}
       ></div>
       <div
         style={boxStyle}
-        className={styles.box}
+        className={cn({
+          [styles.box]: true,
+          [boxClassnames]: true,
+        })}
       ></div>
     </div>
   );

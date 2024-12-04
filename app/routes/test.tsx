@@ -10,7 +10,7 @@ export default function Test() {
         </div>
         <LanguageSelect />
 
-        <ILoading radius={24} />
+        <ILoading radius={10} />
         <Checkbox
           label="Remember me"
           isIndeterminate
