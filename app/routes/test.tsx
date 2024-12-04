@@ -1,4 +1,5 @@
 import { Button, Checkbox, Input, LanguageSelect, RouteError, ThemeSwitcher } from "@/common";
+import { ILoading } from "@/common/shared/Loading/ILoading";
 
 export default function Test() {
   return (
@@ -8,6 +9,8 @@ export default function Test() {
           <ThemeSwitcher />
         </div>
         <LanguageSelect />
+
+        <ILoading radius={24} />
         <Checkbox
           label="Remember me"
           isIndeterminate

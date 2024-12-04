@@ -1,6 +1,6 @@
 import { FC } from "react";
-import { ThemeSwitcher } from "./ThemeSwitcher";
-import { LanguageSelect } from "./LanguageSelect";
+import { ThemeSwitcher } from "../ThemeSwitcher";
+import { LanguageSelect } from "../LanguageSelect";
 import { HttpError } from "./HttpError";
 
 type HttpErrorPageProps = {

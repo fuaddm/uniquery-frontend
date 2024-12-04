@@ -15,13 +15,13 @@ import type { locale, theme, SvgProps, ServiceResp } from "./types";
 import { useThemeAndLocale } from "./hooks/useThemeAndLocale";
 
 // Errors
-import { HttpError } from "./shared/HttpError";
-import { HttpErrorPage } from "./shared/HttpErrorPage";
-import { ErrorMsg } from "./shared/ErrorMsg";
-import { ErrorPage } from "./shared/ErrorPage";
-import { RouteError } from "./shared/RouteError";
-import { HttpErrorDocument } from "./shared/HttpErrorDocument";
-import { ErrorDocument } from "./shared/ErrorDocument";
+import { HttpError } from "./shared/Errors/HttpError";
+import { HttpErrorPage } from "./shared/Errors/HttpErrorPage";
+import { ErrorMsg } from "./shared/Errors/ErrorMsg";
+import { ErrorPage } from "./shared/Errors/ErrorPage";
+import { RouteError } from "./shared/Errors/RouteError";
+import { HttpErrorDocument } from "./shared/Errors/HttpErrorDocument";
+import { ErrorDocument } from "./shared/Errors/ErrorDocument";
 
 // Locales
 import { commonAz } from "./locales/az";

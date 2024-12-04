@@ -1,14 +1,14 @@
 import { FC } from "react";
-import { Button } from "../ui/button";
 import { useNavigate } from "@remix-run/react";
-import { SvgArrowLeft } from "../icons/SvgArrowLeft";
 import { useTranslation } from "react-i18next";
+import { SvgArrowLeft } from "@/common/icons/SvgArrowLeft";
+import { Button } from "@/common/ui/button";
 
-type HttpErrorProps = {
-  status: number;
+type ErrorMsgProps = {
+  message: string;
 };
 
-const HttpError: FC<HttpErrorProps> = ({ status }) => {
+const ErrorMsg: FC<ErrorMsgProps> = ({ message }) => {
   const navigate = useNavigate();
   const { t } = useTranslation("common");
 
@@ -16,11 +16,7 @@ const HttpError: FC<HttpErrorProps> = ({ status }) => {
     <div className="w-full py-4 md:pt-16">
       <div className="flex w-full justify-center">
         <div className="flex max-w-[768px] flex-col items-center">
-          <div className="mb-3 text-center text-base font-semibold text-text-brand-secondary">
-            {status} {t("errors.error")}
-          </div>
-          <div className="mb-6 text-center text-4xl font-semibold text-text-primary md:text-6xl">{t(`errors.${status}.title`)}</div>
-          <div className="mb-12 text-center text-lg font-normal text-text-tertiary md:text-xl">{t(`errors.${status}.subtitle`)}</div>
+          <div className="mb-6 text-center text-xl font-semibold text-text-primary md:text-3xl">{message}</div>
           <div className="flex w-full flex-col-reverse justify-center gap-3 md:flex-row">
             <Button
               onPress={() => navigate(-1)}
@@ -46,4 +42,4 @@ const HttpError: FC<HttpErrorProps> = ({ status }) => {
   );
 };
 
-export { HttpError };
+export { ErrorMsg };
